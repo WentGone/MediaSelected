@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'maven-publish'
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.wentgone'
 
 android {
     compileSdkVersion 28
@@ -21,25 +22,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-}
-
-ext {
-    PUBLISH_GROUP_ID = "${PUBLISH_GROUP_ID}"
-    PUBLISH_ARTIFACT_ID = "${PUBLISH_ARTIFACT_ID}"
-    PUBLISH_VERSION = android.defaultConfig.versionName
-}
-
-//上传文档配置
-uploadArchives {
-    repositories.mavenDeployer {
-        def deployPath = file(getProperty('aar.path'))
-        repository(url: "file://${deployPath.absolutePath}")
-        pom.project {
-            groupId project.PUBLISH_GROUP_ID
-            artifactId project.PUBLISH_ARTIFACT_ID
-            version project.PUBLISH_VERSION
         }
     }
 }
@@ -67,7 +49,7 @@ task sourceJar(type: Jar) {
     classifier "sources"
 }
 
-/*publishing {
+publishing {
     publications {
         aar(MavenPublication) {
             groupId 'com.wg.photo'//包名
@@ -97,4 +79,4 @@ task sourceJar(type: Jar) {
             url("file://" + project.rootDir.absolutePath + "/repository")
         }
     }
-}*/
+}
