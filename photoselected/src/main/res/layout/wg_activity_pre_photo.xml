@@ -8,22 +8,21 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/wg_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:elevation="0dp">
         <android.support.v7.widget.Toolbar
+            android:id="@+id/wg_tool_bar"
             android:layout_width="match_parent"
-            android:layout_height="45dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/wg_iv_cb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:src="@mipmap/wg_check_normal"/>
-            </RelativeLayout>
+            android:layout_height="?attr/actionBarSize">
+            <ImageView
+                android:id="@+id/wg_iv_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_gravity="right"
+                android:src="@mipmap/wg_check_normal"/>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
     <android.support.v7.widget.RecyclerView

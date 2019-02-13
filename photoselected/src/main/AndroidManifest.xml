@@ -7,8 +7,10 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application>
-        <activity android:name=".ui.WGPhotoActivity" />
-        <activity android:name=".ui.WGPrePhotoActivity"></activity>
+        <activity android:name=".ui.WGPhotoActivity"
+            android:theme="@style/WGNoActionBar"/>
+        <activity android:name=".ui.WGPrePhotoActivity"
+            android:theme="@style/WGNoActionBar"></activity>
     </application>
 
 </manifest>

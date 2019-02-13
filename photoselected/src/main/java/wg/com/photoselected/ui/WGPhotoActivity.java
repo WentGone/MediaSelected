@@ -1,15 +1,19 @@
 package wg.com.photoselected.ui;
 
 import android.Manifest;
+import android.app.Activity;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -42,6 +46,8 @@ public class WGPhotoActivity extends WGBaseActivity implements WGLeftAdapter.OnI
     private View mToolLayout;
     private TextView mTVNum,mTVSure;
     private ArrayList<WGMedia> mSelecteds = new ArrayList<>();
+    private ActionBarDrawerToggle mDrawerToggle;
+    private Toolbar mToolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +60,7 @@ public class WGPhotoActivity extends WGBaseActivity implements WGLeftAdapter.OnI
         mToolLayout = findViewById(R.id.wg_tool_layout);
         mTVNum = findViewById(R.id.wg_tool_num);
         mTVSure = findViewById(R.id.wg_tool_sure);
+        mToolBar = findViewById(R.id.wg_tool_bar);
         setListener();
 
         requestPermission(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -61,6 +68,10 @@ public class WGPhotoActivity extends WGBaseActivity implements WGLeftAdapter.OnI
     }
 
     private void setListener() {
+        mDrawerToggle = new OnDragScrollListener(this, mDrawerLayout, mToolBar, R.string.wg_open, R.string.wg_close);
+        mDrawerToggle.syncState();
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
         mRV.setLayoutManager(new GridLayoutManager(this,4));
         mRV.addItemDecoration(new GridSpacingItemDecoration(4,10,false));
         mAdapter = new WGPhotoAdapter(this);
@@ -89,6 +100,30 @@ public class WGPhotoActivity extends WGBaseActivity implements WGLeftAdapter.OnI
             }
         });
     }
+
+    private class OnDragScrollListener extends ActionBarDrawerToggle{
+
+        public OnDragScrollListener(Activity activity, DrawerLayout drawerLayout, @StringRes int openDrawerContentDescRes, @StringRes int closeDrawerContentDescRes) {
+            super(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes);
+        }
+
+        public OnDragScrollListener(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, @StringRes int openDrawerContentDescRes, @StringRes int closeDrawerContentDescRes) {
+            super(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes);
+        }
+
+        @Override
+        public void onDrawerOpened(View drawerView) {
+           /* if (groupImages.size()==0 && dirImageStrings.size()==0){
+                groupImage = PickPreferences.getInstance(PickPhotoActivity.this).getListImage();
+                dirImage = PickPreferences.getInstance(PickPhotoActivity.this).getDirImage();
+                groupImages.putAll(groupImage.getGroupMedias());
+                dirImageStrings.addAll(dirImage.dirName);
+                mListAdapter.notifyDataSetChanged();
+            }*/
+            super.onDrawerOpened(drawerView);
+        }
+    }
+
 
     @Override
     public void permissionSuccess(int requestCode) {

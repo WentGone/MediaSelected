@@ -20,7 +20,11 @@ public abstract class WGBaseActivity extends AppCompatActivity implements Permis
         permissionUtil = new PermissionUtil(this);
         super.onCreate(savedInstanceState);
         if (!Fresco.hasBeenInitialized()){
-            Fresco.initialize(this);
+            ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                    .setDownsampleEnabled(true)
+                    .build();
+
+            Fresco.initialize(this,config);
 
         }
     }

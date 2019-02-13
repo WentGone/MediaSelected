@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -27,11 +28,17 @@ public class WGPrePhotoActivity extends WGBaseActivity {
     private ImageView mIVCB;
     private static final String TAG = "WGPrePhotoActivity";
     private int currentPosition;
+    private Toolbar mToolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.wg_activity_pre_photo);
+        mToolBar = findViewById(R.id.wg_tool_bar);
+        setSupportActionBar(mToolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
+        getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mRV = findViewById(R.id.wg_recyclerview);
         mIVCB = findViewById(R.id.wg_iv_cb);
         mSelected = getIntent().getParcelableArrayListExtra(WGStringConfig.SELECTED_MEDIAS);
@@ -42,6 +49,13 @@ public class WGPrePhotoActivity extends WGBaseActivity {
     }
 
     private void setListener() {
+        mToolBar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         mRV.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         mAdapter = new WGPrePhotoAdapter(this);
         mRV.setAdapter(mAdapter);

@@ -12,27 +12,17 @@
         android:layout_height="wrap_content"
         app:elevation="0dp">
         <android.support.v7.widget.Toolbar
+            android:id="@+id/wg_tool_bar"
             android:layout_width="match_parent"
-            android:layout_height="45dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="返回"
-                    android:gravity="center"
-                    android:layout_centerVertical="true"
-                    android:textColor="@android:color/black"/>
-                <TextView
-                    android:id="@+id/wg_group_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="全部"
-                    android:textSize="17sp"
-                    android:textColor="#3D4147"/>
-            </RelativeLayout>
+            android:layout_height="?attr/actionBarSize">
+            <TextView
+                android:id="@+id/wg_group_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="全部"
+                android:textSize="17sp"
+                android:textColor="#3D4147"/>
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
     <android.support.v4.widget.DrawerLayout

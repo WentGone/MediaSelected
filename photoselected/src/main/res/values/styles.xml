@@ -1,0 +1,7 @@
+<resources>
+    <style name="WGNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="actionBarSize">@dimen/actionBarSize</item>
+    </style>
+</resources>

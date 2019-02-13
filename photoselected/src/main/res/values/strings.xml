@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PhotoSelected</string>
+    <string name="wg_open">0</string>
+    <string name="wg_close">1</string>
 </resources>
